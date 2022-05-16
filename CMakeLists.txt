@@ -4,7 +4,7 @@ project(qcbor
 	LANGUAGES C
 	VERSION 1.0.0)
 
-set(CMAKE_C_FLAGS "-pedantic -Wall -O3 -ffunction-sections")
+set(REQUIRED_QCBOR_COMPILER_CP_FLAG "-pedantic" "-Wall" "-O3" "-ffunction-sections")
 
 set(SOURCE
 	src/ieee754.c
@@ -14,6 +14,16 @@ set(SOURCE
 	src/UsefulBuf.c
 ) 
 
-add_library(qcbor ${SOURCE})
+add_library(qcbor STATIC ${SOURCE})
 
-target_include_directories(qcbor PUBLIC inc)
+target_compile_options(qcbor
+    PRIVATE
+	${COMPILER_CP_FLAG}
+	${QCBOR_COMPILER_CP_FLAG}
+	${REQUIRED_QCBOR_COMPILER_CP_FLAG}
+)
+
+target_include_directories(qcbor
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+)
