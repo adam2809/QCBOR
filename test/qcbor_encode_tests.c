@@ -1772,7 +1772,7 @@ static const uint8_t spExpectedForBstrWrapCancel[] = {0x82, 0x19, 0x01, 0xC3, 0x
 /*
  * bstr wrapping test
  */
-int BstrWrapTest()
+int32_t BstrWrapTest()
 {
    QCBOREncodeContext EC;
 
